@@ -248,7 +248,16 @@ class ChatCompletionRequest(OpenAIBaseModel):
         description=(
             "If specified, will override the default whitespace pattern "
             "for guided json decoding."))
-
+    force_answer_prefix_token_ids: Optional[List[int]] = Field(
+        default=None,
+        description=(
+            "If specified, the output will be prefixed with the given tokens"),
+    )
+    output_log_prob_token_id: Optional[bool] = Field(
+        default=False,
+        description=(
+            "If specified, the output log_prob will add token_id"),
+    )
     # doc: end-chat-completion-extra-params
 
     def to_sampling_params(self) -> SamplingParams:
@@ -635,6 +644,7 @@ class ChatCompletionLogProb(OpenAIBaseModel):
     token: str
     logprob: float = -9999.0
     bytes: Optional[List[int]] = None
+    token_id: Optional[int] = None
 
 
 class ChatCompletionLogProbsContent(ChatCompletionLogProb):
