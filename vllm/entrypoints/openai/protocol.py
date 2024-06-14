@@ -609,6 +609,7 @@ class ChatCompletionLogProb(OpenAIBaseModel):
     logprob: float = -9999.0
     bytes: Optional[List[int]] = None
     token_id: Optional[int] = None
+    eos: Optional[bool] = False
 
 
 class ChatCompletionLogProbsContent(ChatCompletionLogProb):
