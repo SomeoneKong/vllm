@@ -9,6 +9,7 @@ from typing_extensions import Annotated
 
 from vllm.config import ModelConfig
 from vllm.engine.protocol import AsyncEngineClient
+from vllm.engine.llm_engine import _load_generation_config_dict
 from vllm.entrypoints.logger import RequestLogger
 # yapf conflicts with isort for this block
 # yapf: disable
@@ -74,6 +75,7 @@ class OpenAIServing:
 
         self.async_engine_client = async_engine_client
         self.model_config = model_config
+        self.generation_config = _load_generation_config_dict(self.model_config)
         self.max_model_len = model_config.max_model_len
 
         self.served_model_names = served_model_names
